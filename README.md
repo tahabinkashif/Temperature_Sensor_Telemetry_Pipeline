@@ -1,4 +1,4 @@
-# Temperature Telemetry Pipeline
+# Temperature Sensor Telemetry Pipeline
 
 A complete **edge → gateway → dashboard** telemetry system:
 
@@ -144,12 +144,13 @@ Node-RED connects to the same MQTT broker and:
 - subscribes to the telemetry topics
 - drives a dashboard chart + gauges + text fields
   
-<img src="nodered/Dashboard.png" alt="Dashboard" width="150">
+<img src="nodered/Dashboard.png" alt="Dashboard" width="200">
 
 ## Documentation
 
 - 📄 [Telemetry Protocol](docs/PROTOCOL.md)
 - 🔌 [Hardware Wiring](docs/WIRING.md)
+
 
 
 
