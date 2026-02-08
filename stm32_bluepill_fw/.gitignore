@@ -1,0 +1,25 @@
+# Build output
+Debug/
+Release/
+**/Debug/
+**/Release/
+
+# Compiled outputs
+*.o
+*.a
+*.d
+*.su
+*.elf
+*.bin
+*.hex
+*.map
+
+# Eclipse/CubeIDE workspace junk (not usually inside project)
+.metadata/
+
+# Optional (can ignore)
+.settings/
+
+# Windows junk
+Thumbs.db
+.DS_Store
