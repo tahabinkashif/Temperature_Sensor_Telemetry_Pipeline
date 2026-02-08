@@ -1,4 +1,4 @@
-\# Telemetry Binary Protocol Specification
+# Telemetry Binary Protocol Specification
 
 
 
@@ -10,13 +10,13 @@ STM32 BluePill (edge node) to the ESP32 (gateway).
 
 The protocol is optimized for:
 
-\- Deterministic parsing
+- Deterministic parsing
 
-\- Low overhead
+- Low overhead
 
-\- DMA-friendly framing
+- DMA-friendly framing
 
-\- Forward compatibility via versioning
+- Forward compatibility via versioning
 
 
 
