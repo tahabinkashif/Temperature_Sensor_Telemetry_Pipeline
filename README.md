@@ -143,11 +143,13 @@ When the ESP32 receives STOP, it stops publishing the temperature telemetry.
 Node-RED connects to the same MQTT broker and:
 - subscribes to the telemetry topics
 - drives a dashboard chart + gauges + text fields
-![Dashboard](nodered/Dashboard.png)
+  
+<img src="nodered/Dashboard.png" alt="Dashboard" width="400">
 
 ## Documentation
 
 - 📄 [Telemetry Protocol](docs/PROTOCOL.md)
 - 🔌 [Hardware Wiring](docs/WIRING.md)
+
 
 
