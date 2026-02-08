@@ -144,3 +144,7 @@ Node-RED connects to the same MQTT broker and:
 - subscribes to the telemetry topics
 - drives a dashboard chart + gauges + text fields
 
+## Documentation
+
+- 📄 [Telemetry Protocol](docs/protocol.md)
+- 🔌 [Hardware Wiring](docs/wiring.md)
