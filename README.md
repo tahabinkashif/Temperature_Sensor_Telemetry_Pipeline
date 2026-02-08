@@ -14,11 +14,10 @@ A complete **edge → gateway → dashboard** telemetry system:
 temperature-telemetry-pipeline/
 ├── README.md
 ├── docs/
-│   ├── protocol.md        # Frame layout, CRC, examples
-│   ├── wiring.md          # Pin mappings (STM32 ↔ ESP32 ↔ LM35)
-│   └── images/
-├── stm32-bluepill-fw/     # STM32CubeIDE project
-├── esp32-fw/              # ESP-IDF firmware
+│   ├── PROTOCOL.md        # Frame layout, CRC, examples
+│   └── WIRING.md          # Pin mappings (STM32 ↔ ESP32 ↔ LM35) 
+├── stm32_bluepill:fw/     # STM32CubeIDE project
+├── esp32_fw/              # ESP-IDF firmware
 └── nodered/               # Node-RED flow export
 ```
 
@@ -150,6 +149,7 @@ Node-RED connects to the same MQTT broker and:
 
 - 📄 [Telemetry Protocol](docs/PROTOCOL.md)
 - 🔌 [Hardware Wiring](docs/WIRING.md)
+
 
 
 
