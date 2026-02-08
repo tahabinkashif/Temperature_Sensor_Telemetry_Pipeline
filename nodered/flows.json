@@ -1,0 +1,317 @@
+[
+    {
+        "id": "a28256ec9d69713d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "707c85fb63b575e0",
+        "type": "mqtt in",
+        "z": "a28256ec9d69713d",
+        "name": "",
+        "topic": "esp32/telemetry",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ce5e8b1588efe223",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "4e82119945d7a885"
+            ]
+        ]
+    },
+    {
+        "id": "4e82119945d7a885",
+        "type": "json",
+        "z": "a28256ec9d69713d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "5e2aaecf3a7ed410"
+            ]
+        ]
+    },
+    {
+        "id": "5e2aaecf3a7ed410",
+        "type": "function",
+        "z": "a28256ec9d69713d",
+        "name": "function 1",
+        "func": "let d = msg.payload;\n\n// If payload is still a string, parse it\nif (typeof d === \"string\") {\n    try {\n        d = JSON.parse(d);\n    } catch (e) {\n        node.warn(\"Bad JSON: \" + msg.payload);\n        return null;\n    }\n}\n\n// Extract values safely\nconst temp = Number(d.temp);\nconst adc = Number(d.adc);\nconst flags = d.flags;\nconst seq = d.seq;\n\n// Output 1 -> Gauge (needs number)\nconst out1 = { payload: temp };\n\n// Output 2 -> Chart (needs number + topic)\nconst out2 = { payload: temp, topic: \"temp\" };\n\n// Output 3 -> Text (needs string)\nconst out3 = { payload: `Temp: ${temp} °C | ADC: ${adc} | Flags: ${flags} | Seq: ${seq}` };\n\nreturn [out1, out2, out3];\n",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "9501971a150b4ced"
+            ],
+            [
+                "22189d574ce29b45"
+            ],
+            [
+                "5946c2701d282c9f"
+            ]
+        ]
+    },
+    {
+        "id": "9501971a150b4ced",
+        "type": "ui_gauge",
+        "z": "a28256ec9d69713d",
+        "name": "",
+        "group": "d844823863bf9345",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temprature (°C) ",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "330",
+        "colors": [
+            "#00aaff",
+            "#ff9500",
+            "#f93e3e"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 880,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "22189d574ce29b45",
+        "type": "ui_chart",
+        "z": "a28256ec9d69713d",
+        "name": "",
+        "group": "d844823863bf9345",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Temp vs Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 900,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5946c2701d282c9f",
+        "type": "ui_text",
+        "z": "a28256ec9d69713d",
+        "group": "d844823863bf9345",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Telemetry",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "10",
+        "color": "#000000",
+        "x": 880,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "90fb2aa7064b8990",
+        "type": "ui_button",
+        "z": "a28256ec9d69713d",
+        "name": "",
+        "group": "d844823863bf9345",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Start Temprature",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "TEMP",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 610,
+        "y": 300,
+        "wires": [
+            [
+                "7ea5d6e4d448fc6f",
+                "bda8512f43bc5fc7"
+            ]
+        ]
+    },
+    {
+        "id": "a61709b5e3e622ad",
+        "type": "ui_button",
+        "z": "a28256ec9d69713d",
+        "name": "",
+        "group": "d844823863bf9345",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Stop Temprature",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "STOP",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "7ea5d6e4d448fc6f"
+            ]
+        ]
+    },
+    {
+        "id": "7ea5d6e4d448fc6f",
+        "type": "mqtt out",
+        "z": "a28256ec9d69713d",
+        "name": "",
+        "topic": "esp32/cmd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ce5e8b1588efe223",
+        "x": 810,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "bda8512f43bc5fc7",
+        "type": "debug",
+        "z": "a28256ec9d69713d",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ce5e8b1588efe223",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.18.31",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d844823863bf9345",
+        "type": "ui_group",
+        "name": "Temprature Monitor",
+        "tab": "446549094c4cbcbe",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": "",
+        "info": "ADC + DMA -> STM32 -> Packetize -> UART + DMA -> MQTT -> Dashboard"
+    },
+    {
+        "id": "446549094c4cbcbe",
+        "type": "ui_tab",
+        "name": "ESP32 Dashboard",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3f9a2449c96d2d13",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
