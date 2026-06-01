@@ -56,7 +56,7 @@ This turns 100 raw ADC samples into one averaged sample per half-buffer update.
 
 ## 4) IIR filtering on the averaged sample (smoothing)
 
-After averaging, you run an IIR low-pass:
+After averaging, we run an IIR low-pass:
 
 - f[n]=87​f[n−1]+81​x[n]
 
